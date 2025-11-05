@@ -23,3 +23,5 @@ let dog = {
 console.log(person.name)
 console.log(person.sayHello());
 console.log(dog.bark());
+
+let personDog = {...person, ...dog};

@@ -41,7 +41,62 @@
         <span class="status">연결 상태: 준비 전</span>
       </div>
     </header>
-    <main>
+    <main class="main-layout">
+
+      <section class="panel chart-panel">
+        <div class="panel-header">
+          <h2 class="panel-title">캔들차트 영역</h2>
+          <p class="panel-subtitle">
+
+          </p>
+        </div>
+
+        <div id="chart-container">
+          <div id="chart-placeholder">
+            <p></p>
+          </div>
+        </div>
+      </section>
+
+      <aside class="panel side-panel">
+        <div class="panel-header">
+          <h2 class="panel-title">정보 / 지표 패널</h2>
+          <p class="panel-subtitle"> </p>
+        </div>
+
+        <div class="info-block">
+          <h3>현재 선택 정보</h3>
+          <p class="info-item"><strong>심볼</strong> : BTCUSDT</p>
+          <p class="info-item"><strong>주기</strong> : 1h</p>
+          <p class="info-item"><strong>거래소</strong> : Binance Spot</p>
+        </div>
+
+        <div class="info-block">
+          <h3>가격 요약</h3>
+          <ul class="plain-list">
+            <li>현재가: —</li>
+            <li>고가(High): —</li>
+            <li>저가(Low): —</li>
+            <li>24h 변동률: —</li>
+          </ul>
+        </div>
+
+        <div class="info-block">
+          <h3>지표 (향후 추가)</h3>
+          <ul class="plain-list">
+            <li>이동평균선(MA 20, MA 50)</li>
+            <li>RSI (14)</li>
+            <li>매수/매도 시그널 마커</li>
+          </ul>
+        </div>
+
+        <div class="info-block note">
+          <h3>2주차 목표</h3>
+          <p>
+            <code>#chart-container</code> <br>
+          </p>
+        </div>
+      </aside>
 
     </main>
 

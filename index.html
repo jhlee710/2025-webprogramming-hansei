@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <title>바이낸스 실시간 그래프 분석 웹 프로그램</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="./style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="topbar">
+      <div class="title-block">
+        <h1 class="title">바이낸스 실시간 그래프 분석 웹 프로그램</h1>
+        <p class="subtitle">ApexCharts + Binance API 기반 실시간 데이터 시각화</p>
+      </div>
+
+      <div class="controls">
+        <label>
+          심볼
+          <select id="symbol">
+            <option>BTCUSDT</option>
+            <option>ETHUSDT</option>
+            <option>XRPUSDT</option>
+            <option>DOGEUSDT</option>
+            <option>XAUTUSDT</option>
+          </select>
+        </label>
+
+        <label>
+          주기
+          <select id="interval">
+            <option value="1m">1m</option>
+            <option value="5m" selected>5m</option>
+            <option value="15m">15m</option>
+            <option value="1h">1h</option>
+            <option value="4h">4h</option>
+            <option value="1d">1d</option>
+          </select>
+        </label>
+
+        <button class="btn" id="loadBtn">불러오기</button>
+        <span class="status" id="status">상태: 대기 중</span>
+      </div>
+    </header>
+
+    <main class="main-layout">
+
+      <section class="panel chart-panel">
+        <div class="panel-header">
+          <h2 class="panel-title">실시간 캔들차트</h2>
+          <p class="panel-subtitle">Binance REST + WebSocket 기반 실시간 업데이트</p>
+        </div>
+
+        <div id="chart-container">
+          <div id="chart-placeholder">
+            <p>불러오기 버튼을 누르면 이곳에 차트가 표시됩니다.</p>
+          </div>
+        </div>
+      </section>
+
+      <aside class="panel side-panel">
+        <div class="panel-header">
+          <h2 class="panel-title">정보 패널</h2>
+          <p class="panel-subtitle">현재가 · 고가 · 저가 등 주요 데이터 표시</p>
+        </div>
+
+        <div class="info-block">
+          <h3>선택 정보</h3>
+          <p class="info-item"><strong>심볼</strong> : <span id="infoSymbol">BTCUSDT</span></p>
+          <p class="info-item"><strong>주기</strong> : <span id="infoInterval">5m</span></p>
+        </div>
+
+        <div class="info-block">
+          <h3>가격 요약</h3>
+          <ul class="plain-list">
+            <li>현재가: <span id="infoLastPrice">—</span></li>
+            <li>고가(High): <span id="infoHigh">—</span></li>
+            <li>저가(Low): <span id="infoLow">—</span></li>
+          </ul>
+        </div>
+
+        <div class="info-block note">
+          <h3>설명</h3>
+          <p>
+            • Binance REST API로 과거 데이터 로드<br>
+            • ApexCharts로 캔들차트 표시<br>
+            • WebSocket으로 실시간 업데이트<br>
+            • 정보 패널에 현재가/고가/저가 반영
+          </p>
+        </div>
+      </aside>
+
+    </main>
+
+    <footer class="bottombar">
+      <div>최근 가격: <b id="lastPrice">—</b></div>
+      <div>업데이트: <span id="lastTs">—</span></div>
+    </footer>
+
+  </div>
+
+  <script src="./binance.js"></script>
+</body>
+</html>

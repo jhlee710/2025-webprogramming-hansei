@@ -30,6 +30,11 @@ function setStatus(text){
   elStatus.textContent = "상태: " + text;
 }
 
+function fmt2 (v){
+  const n = Number(v);
+  return Number.isFinite(n) ? n.toFixed(2) : "—";
+}
+
 function formatTime(ms){
   const d = new Date(ms);
   const pad = n => String(n).padStart(2,"0");
@@ -95,7 +100,7 @@ function calcRSI(values, period=14){
 function indicatorSeries(candles, values){
   return candles.map((pt, i) => ({
     x: pt.x,
-    y: values[i] === null ? null : round(values[i], 4)
+    y: values[i] === null ? null : Number(values[i].toFixed(2))
   }));
 }
 
@@ -186,13 +191,13 @@ function updateAnalysisAndChart(){
   const lastSMA60 = sma60[sma60.length - 1];
   const lastRSI   = rsi14[rsi14.length - 1];
 
-  elInfoSMA20.textContent = lastSMA20 === null ? "—" : round(lastSMA20, 4);
-  elInfoSMA60.textContent = lastSMA60 === null ? "—" : round(lastSMA60, 4);
+  elInfoSMA20.textContent = fmt2(lastSMA20);
+  elInfoSMA60.textContent = fmt2(lastSMA60);
 
   const t = trendLabel(lastClose, lastSMA20, lastSMA60);
   elInfoTrend.textContent = t;
 
-  elInfoRSI.textContent = lastRSI === null ? "—" : round(lastRSI, 2);
+  elInfoRSI.textContent = fmt2(lastRSI);
   elInfoRSIState.textContent = rsiState(lastRSI);
 }
 
@@ -221,12 +226,12 @@ function connectWS(symbol, interval){
       if(candleData.length > 500) candleData.shift();
     }
 
-    elLastPrice.textContent = item.y[3];
+    elLastPrice.textContent = fmt2(item.y[3]);
     elLastTs.textContent    = formatTime(k.T);
 
-    elInfoLast.textContent = item.y[3];
-    elInfoHigh.textContent = item.y[1];
-    elInfoLow.textContent  = item.y[2];
+    elInfoLast.textContent = fmt2(item.y[3]);
+    elInfoHigh.textContent = fmt2(item.y[1]);
+    elInfoLow.textContent  = fmt2(item.y[2]);
 
     updateAnalysisAndChart();
   };
@@ -249,12 +254,12 @@ async function loadData(){
     candleData = klinesToCandles(history);
 
     const lastK = history[history.length - 1];
-    elLastPrice.textContent = lastK[4];
+    elLastPrice.textContent = fmt2(lastK[4]);
     elLastTs.textContent    = formatTime(lastK[6]);
 
-    elInfoLast.textContent = lastK[4];
-    elInfoHigh.textContent = lastK[2];
-    elInfoLow.textContent  = lastK[3];
+    elInfoLast.textContent = fmt2(lastK[4]);
+    elInfoHigh.textContent = fmt2(lastK[2]);
+    elInfoLow.textContent  = fmt2(lastK[3]);
 
     updateAnalysisAndChart();
 
